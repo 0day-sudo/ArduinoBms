@@ -95,6 +95,32 @@ void register_and_check_units() {
 }
 
 
+void print_BMS_Status() {
+  Serial.println("\n--- Aktueller BMS Status ---");
+  Serial.println("ID\tStatus\tZelle 1\tZelle 2\tGesamt");
+  Serial.println("------------------------------------------");
+
+  for (int i = 0; i < currentUnitCount; i++) {
+    Serial.print(i == 0 ? "HEAD" : String(i)); // Markiert die ID 0 als Head
+    Serial.print("\t");
+
+    if (Units[i].isConnected) {
+      Serial.print("OK\t");
+      Serial.print(Units[i].voltage_Cell1, 2); // 2 Nachkommastellen
+      Serial.print("V\t");
+      Serial.print(Units[i].voltage_Cell2, 2);
+      Serial.print("V\t");
+      
+      float total = Units[i].voltage_Cell1 + Units[i].voltage_Cell2;
+      Serial.print(total, 2);
+      Serial.println("V");
+    } else {
+      Serial.println("DISCONNECTED");
+    }
+  }
+  Serial.println("------------------------------------------");
+}
+
 
 void setup() {
   // wichtig fuer das debugging
@@ -122,6 +148,8 @@ void loop() {
   read_Data_for_first_unit();
 
   register_and_check_units();
+
+  print_BMS_Status();
 
   // Status-LED blinken lassen (ohne delay, damit Messung schnell bleibt)
   digitalWrite(PIN_STATUS_LED, !digitalRead(PIN_STATUS_LED));
