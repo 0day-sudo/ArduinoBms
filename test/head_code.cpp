@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "BMS_Definitions.h"
-#include "head_local_functions.cpp"
+#include "local_functions.cpp"
 #include <SoftwareSerial.h>
 
 // Anzahl der aktuell verbundehnen Einheiten

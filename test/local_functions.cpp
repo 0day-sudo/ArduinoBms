@@ -1,6 +1,6 @@
 #ifndef HEAD_LOCAL_FUNCTIONS_H
 #define HEAD_LOCAL_FUNCTIONS_H
-#include "probe.cpp"
+#include "head_code.cpp"
 
 #include <Arduino.h>
 #include "BMS_Definitions.h"
